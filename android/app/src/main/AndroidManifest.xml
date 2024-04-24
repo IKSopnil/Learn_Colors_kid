@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gpt_game2">
    <application
-        android:label="gpt_game2"
+        android:label="Learn Colors"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,5 +1,5 @@
 name: gpt_game2
-description: A new Flutter project.
+description: Color Game is a fun and educational app designed to help users, especially kids, learn about different colors in an interactive way. With a simple and intuitive interface, users can tap on colored squares to match them with their corresponding color names. The game dynamically generates random colors, challenging users to identify them correctly within a limited time frame.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -55,6 +55,15 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  assets:
+    - android/app/src/main/res/mipmap-mdpi/ic_launcher.png
+    - android/app/src/main/res/mipmap-hdpi/ic_launcher.png
+    - android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+    - android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+    - android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+    - ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png
+    - ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png
+    - ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
