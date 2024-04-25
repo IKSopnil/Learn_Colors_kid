@@ -102,11 +102,21 @@ class _ColorGameScreenState extends State<ColorGameScreen> {
   Color _currentColor = Colors.black;
   String _currentColorName = '';
   int _score = 0;
+  bool _showLogo = true;
 
   @override
   void initState() {
     super.initState();
     _generateNewColor();
+    _startGame();
+  }
+
+  void _startGame() {
+    Timer(Duration(seconds: 3), () {
+      setState(() {
+        _showLogo = false;
+      });
+    });
   }
 
   void _generateNewColor() {
@@ -157,69 +167,90 @@ class _ColorGameScreenState extends State<ColorGameScreen> {
         title: Text('Learn Colors', style: TextStyle(color: Colors.white)),
         centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Tap the color:',
-              style: TextStyle(
-                fontSize: 24,
-                fontFamily: 'Roboto', // Example of using a custom font family
-                fontWeight: FontWeight.bold, // Bold text
-                fontStyle: FontStyle.italic, // Italic text
-                color: Colors.black87, // Text color
+      backgroundColor: _showLogo ? Colors.black : Colors.grey[300], // Set background color conditionally
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Your game content
+          AnimatedOpacity(
+            opacity: _showLogo ? 1.0 : 0.0,
+            duration: Duration(milliseconds: 500),
+            child: Center(
+              child: Container(
+                color: Colors.black, // Set background color to black
+                child: Image.asset('assets/logo.gif'), // Adjust the path according to your project
               ),
             ),
-            SizedBox(height: 20),
-            Text(
-              _currentColorName,
-              style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
-                color: _currentColor,
-              ),
-            ),
-            SizedBox(height: 20),
-            Wrap(
-              alignment: WrapAlignment.center,
-              children: _colors
-                  .map(
-                    (color) => GestureDetector(
-                      onTap: () => _checkAnswer(color),
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        margin: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: color,
-                          borderRadius: BorderRadius.circular(25),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset: Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                      ),
+          ),
+          AnimatedOpacity(
+            opacity: _showLogo ? 0.0 : 1.0,
+            duration: Duration(milliseconds: 500),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Tap the color:',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontFamily: 'Roboto', // Example of using a custom font family
+                      fontWeight: FontWeight.bold, // Bold text
+                      fontStyle: FontStyle.italic, // Italic text
+                      color: Colors.black87, // Text color
                     ),
-                  )
-                  .toList(),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Score: $_score',
-              style: TextStyle(
-                fontSize: 24,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    _currentColorName,
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      color: _currentColor,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    children: _colors
+                        .map(
+                          (color) => GestureDetector(
+                            onTap: () => _checkAnswer(color),
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              margin: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                color: color,
+                                borderRadius: BorderRadius.circular(25),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: Offset(0, 3), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Score: $_score',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
